@@ -23,8 +23,6 @@ class AlienInvasion:
             self._check_events()
             self._update_screen()
             
-
-            
             # Make the most recently drawn screen visible.
             pygame.display.flip()
         
