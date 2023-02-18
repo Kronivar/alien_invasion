@@ -78,7 +78,7 @@ class AlienInvasion:
         
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.bottom <= 0: # type: ignore
                 self.bullets.remove(bullet)
 
     def _create_fleet(self):
@@ -86,7 +86,7 @@ class AlienInvasion:
         # Create an alien and find the number of aliens in a row.
         # Spacing between each alien is equal to one alien width.
         alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
+        alien_width, alien_height = alien.rect.size # type: ignore
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
 
@@ -104,10 +104,10 @@ class AlienInvasion:
     def _create_alien(self, alien_number, row_number):
         # Create an alien and place it in the row.
         alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
+        alien_width, alien_height = alien.rect.size # type: ignore
         alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        alien.rect.y = alien_height + 2 * alien.rect.height * row_number
+        alien.rect.x = alien.x # type: ignore
+        alien.rect.y = alien_height + 2 * alien.rect.height * row_number # type: ignore
         self.aliens.add(alien)
 
     def _update_aliens(self):
@@ -121,14 +121,14 @@ class AlienInvasion:
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge"""
         for alien in self.aliens.sprites():
-            if alien.check_edges():
+            if alien.check_edges(): # type: ignore
                 self._change_fleet_direction()
                 break
     
     def _change_fleet_direction(self):
         """Drop the entire fleet and change the fleet's direction"""
         for alien in self.aliens.sprites():
-            alien.rect.y += self.settings.fleet_drop_speed
+            alien.rect.y += self.settings.fleet_drop_speed # type: ignore
             self.settings.fleet_direction *= -1
 
     def _update_screen(self):
@@ -137,7 +137,7 @@ class AlienInvasion:
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+            bullet.draw_bullet() # type: ignore
         self.aliens.draw(self.screen)
         
             
